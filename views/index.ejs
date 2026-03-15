@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-secondary">
+    <nav class="navbar navbar-expand-lg px-4 py-0 bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand text-light fw-bold" href="#">EduCore</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -35,19 +34,12 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" href="#">Connect With us</a>
+              <a class="nav-link text-light" href="http://localhost:5500/login">Add Student</a>
             </li>
-            
+            <li class="nav-item">
+              <a class="nav-link text-light" href="">Update Student</a>
+            </li>
           </ul>
-          <form class="d-flex mx-auto w-50" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-dark" type="submit">Search</button>
-          </form>
         </div>
       </div>
     </nav>
@@ -58,11 +50,11 @@
       <div class="card-body d-flex gap-3 p-0">
           <div class="border border-secondary d-inline-block w-25 px-4 rounded-3 bg-danger">
             <p class=" lead">Total Students</p>
-            <h2>1,450</h2>
+            <h2 id="student"><%= total %></h2>
           </div>
           <div class="border border-secondary d-inline-block w-25 px-4 rounded-3 bg-warning">
             <p class=" lead">Total Teachers</p>
-            <h2>210</h2>
+            <h2>00</h2>
           </div>
           <div class="border border-secondary d-inline-block w-25 px-4 rounded-3 bg-success">
             <p class=" lead">Classes Today</p>
@@ -78,73 +70,39 @@
 
     <div class=" card mx-2 mt-4 rounded-3" style="width: 100%;">
       <h5 class=" mx-2 mt-2">Recent Student Enrollments</h5>
-      <table class="table table-hover table-striped table-dark">
+      <table class="table table-hover table-striped table-dark" id="table">
         <thead>
           <tr class="table-active table-primary">
             <th scope="col">Student Name</th>
-            <th scope="col">Roll No</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col">E-Mail</th>
+            <th scope="col">Password</th>
+            <th scope="col">Registration Id</th>
+            <th scope="col">Class</th>
+            <th>Action</th>
           </tr>
         </thead>
+        
         <tbody>
+          <% for(let student of data) { %>
           <tr>
-            <td>Deepak</td>
-            <td>2267654</td>
-            <td>BCA</td>
-            <td><a href="" class="btn btn-outline-info">Active</a></td>
-            <td>Null</td>
+            <td><%= student.studentName %></td>
+            <td><%= student.email %></td>
+            <td><%= student.password %></td>
+            <td><%= student.registrationId %></td>
+            <td><%= student.class %></td>
+            <td>
+              <a href="/delete/<%= student.registrationId %>"
+                class="btn btn-outline-info btn-sm" 
+                onclick="return confirm('Are you sure?')">
+                Delete
+              </a>
+              <a href="http://localhost:5500/edit/<%= student.registrationId %>"
+                class="btn btn-danger btn-sm">
+                Edit
+              </a>
+            </td>
           </tr>
-          <tr>
-            <td>Ananya</td>
-            <td>2254654</td>
-            <td>Class 12th</td>
-            <td><a href="" class="btn btn-outline-light">Active</a></td>
-            <td>Null</td>
-          </tr>
-          <tr>
-            <td>Pawan</td>
-            <td>2245098</td>
-            <td>BCA</td>
-            <td><a href="" class="btn btn-outline-danger">Active</a></td>
-            <td>Null</td>
-          </tr>
-          <tr>
-            <td>Vivek</td>
-            <td>2098776</td>
-            <td>BCA</td>
-            <td><a href="" class="btn btn-outline-primary">Active</a></td>
-            <td>Null</td>
-          </tr>
-          <tr>
-            <td>Saurav</td>
-            <td>2667654</td>
-            <td>BCA</td>
-            <td><a href="" class="btn btn-outline-success">Active</a></td>
-            <td>Null</td>
-          </tr>
-          <tr>
-            <td>Jahnavi</td>
-            <td>2067654</td>
-            <td>Class 12th</td>
-            <td><a href="" class="btn btn-outline-warning">Active</a></td>
-            <td>Null</td>
-          </tr>
-          <tr>
-            <td>Divya</td>
-            <td>1967654</td>
-            <td>BSc</td>
-            <td><a href="" class="btn btn-outline-secondary">Active</a></td>
-            <td>Null</td>
-          </tr>
-          <tr>
-            <td>Sana</td>
-            <td>1867654</td>
-            <td>BTech</td>
-            <td><a href="" class="btn btn-outline-info">Active</a></td>
-            <td>Null</td>
-          </tr>
+          <% } %>
         </tbody>
       </table>
     </div>
